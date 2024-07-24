@@ -1,0 +1,35 @@
+ContextLoad é todos os componentes da estrutura Spring
+Testa todos os componentes antes de iniciar
+		
+		
+Anotações utilizadas em classes de testes:
+
+@SpringBootTest - Usada para integração (código), carrega todo o contexto
+@SpringBootTest & @AutoConfigureMockMvc - Usada para integração e teste na web, carrega todo o contexto e contexto web
+@WebMvcTest(Class.test) - Usada para teste de unidade
+@ExtendWith(SpringExtension.class) - Usada para usar os conteúdos do Spring com JUnit
+@DataJpaTest - Usada para testar apenas componentes do Spring JPA (obs: Cada teste transacional dá rollback no final
+então não vai ter Update ou Delete acidental(eu acho))
+
+Fixtures
+É uma organização de código com foco em evitar repetições
+E algumas anotações ajudam nisso, e são elas:
+
+@BeforeAll (Modo estático) Preparação antes de todos os testes da classe
+@AfterAll (Modo estático) Preparação depois de todos os testes da classe
+@BeforeEach Preparação antes de cada teste da classe
+@AfterEach Preparação depois de cada teste da classe
+
+Tenha em mente que essas anotações são do JUnit 5, e podem mudar dependendo da versão
+
+Mockito
+O mosquito serve para podermos mockar dados, tal mockagem de dados evita que seja necessário carregar classes inteiras, evitando assim
+um teste de integração e se mantém em teste unitário.
+
+
+Quando usar Mock e quando usar MockBean
+
+Mock: Usado quando a classe de teste não carrega o contexto da aplicação. É mais rápido e enxuto (@ExtendWith)
+
+MockBean: Usado quando a classe de teste carrega o contexto da aplicação e precisa mockar algum bean do sistema 
+(@WebMvcTest - Usado para carregar só a camada web / @SpringBootTest - Usado para carregar o contexto)
